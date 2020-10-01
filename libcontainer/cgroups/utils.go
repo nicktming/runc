@@ -9,6 +9,18 @@ import (
 	"path/filepath"
 )
 
+func FindCgroupMountpoint(cgroupPath, subsystem string) (string, error) {
+
+}
+
+func FindCgroupMountpointAndRoot(cgroupPath, subsystem string) (string, string, error) {
+
+}
+
+func isSubsystemAvailable(subsystem string) bool {
+	
+}
+
 func FindCgroupMountpointDir() (string, error) {
 	f, err := os.Open("/proc/self/mountinfo")
 	if err != nil {
