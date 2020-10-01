@@ -6,7 +6,45 @@ import (
 	"strings"
 	"fmt"
 	"os"
+	"path/filepath"
 )
+
+func FindCgroupMountpointDir() (string, error) {
+	f, err := os.Open("/proc/self/mountinfo")
+	if err != nil {
+		return "", err
+	}
+	defer f.Close()
+
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		text := scanner.Text()
+		fields := strings.Split(text, " ")
+
+		index := strings.Index(text, " - ")
+		fmt.Printf("text[index + 3L]=%v\n", text[index+3:])
+		postSeparatorFields := strings.Fields(text[index+3:])
+		numPostFields := len(postSeparatorFields)
+
+		if numPostFields == 0 {
+			return "", fmt.Errorf("Found no fields post '-' in %q", text)
+		}
+
+		if postSeparatorFields[0] == "cgroup" {
+			// Check that the mount is properly formatted.
+			if numPostFields < 3 {
+				return "", fmt.Errorf("Error found less than 3 fields post '-' in %q", text)
+			}
+
+			return filepath.Dir(fields[4]), nil
+		}
+	}
+	if err := scanner.Err(); err != nil {
+		return "", err
+	}
+
+	return "", NewNotFoundError("cgroup")
+}
 
 func ParseCgroupFile(path string) (map[string]string, error) {
 	f, err := os.Open(path)
