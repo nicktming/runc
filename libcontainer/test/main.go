@@ -17,7 +17,8 @@ func main() {
 
 	root, err := cgroups.FindCgroupMountpointDir()
 	if err != nil {
-		return "", err
+		fmt.Printf("FindCgroupMountpointDir with error: %v\n", root)
+		return
 	}
 	fmt.Printf("root: %v\n", root)
 }
