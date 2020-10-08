@@ -94,6 +94,7 @@ func (m *Manager) Apply(pid int) (err error) {
  		}
 		fmt.Printf("=====>m.Paths:%v, sys.Name():%v,p:%v\n", m.Paths, sys.Name(), p)
 		m.Paths[sys.Name()] = p
+		fmt.Printf("=====>m.Paths:%v, done", m.Paths)
 		if err := sys.Apply(d); err != nil {
 			if isIgnorableError(m.Rootless, err) && m.Cgroups.Path == "" {
 				delete(m.Paths, sys.Name())
