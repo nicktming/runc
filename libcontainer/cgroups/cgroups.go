@@ -12,7 +12,6 @@ type Manager interface {
 	// Returns the PIDs inside the cgroup set & all sub-cgroups
 	GetAllPids() ([]int, error)
 
-
 }
 
 type NotFoundError struct {

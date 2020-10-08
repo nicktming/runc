@@ -35,9 +35,9 @@ func (s subsystemSet) Get(name string) (subsystem, error) {
 type subsystem interface {
 	Name() string
 	//GetStats(path string, stats *cgroups.Stats) error
-	Remove(*cgroupData) error
+	//Remove(*cgroupData) error
 	Apply(*cgroupData) error
-	Set(path string, cgroup *configs.Cgroup) error
+	//Set(path string, cgroup *configs.Cgroup) error
 }
 
 type Manager struct {
@@ -78,7 +78,7 @@ func (m *Manager) Apply(pid int) (err error) {
 	defer m.mu.Unlock()
 
 	var c = m.Cgroups
-	d, err := getCgroupData(m.Cgroups, pid)
+	d, err := getCgroupData(c, pid)
 	if err != nil {
 		return err
 	}
