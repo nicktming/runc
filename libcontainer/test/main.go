@@ -28,7 +28,7 @@ func test1() {
 func test2() {
 	m := fs.Manager {
 		Cgroups: &configs.Cgroup{
-
+			Paths: 		make(map[string]string),
 		},
 	}
 	m.Apply(1)
