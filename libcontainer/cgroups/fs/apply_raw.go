@@ -107,7 +107,7 @@ func (m *Manager) Apply(pid int) (err error) {
 type cgroupData struct {
 	root 		string
 	innerPath 	string
-	config		*configs
+	config		*configs.Cgroup
 	pid 		int
 }
 
