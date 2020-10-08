@@ -92,6 +92,7 @@ func (m *Manager) Apply(pid int) (err error) {
 			}
 			return err
  		}
+		fmt.Printf("=====>m.Paths:%v, sys.Name():%v,p:%v\n", m.Paths, sys.Name(), p)
 		m.Paths[sys.Name()] = p
 		if err := sys.Apply(d); err != nil {
 			if isIgnorableError(m.Rootless, err) && m.Cgroups.Path == "" {
