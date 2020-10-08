@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func test1() {
 	cgs, err := cgroups.ParseCgroupFile("/proc/self/cgroup")
 	if err != nil {
 		fmt.Errorf("err: %v", err)
@@ -21,5 +21,13 @@ func main() {
 		return
 	}
 	fmt.Printf("root: %v\n", root)
+}
+
+func test2() {
+
+}
+
+func main() {
+
 }
 
