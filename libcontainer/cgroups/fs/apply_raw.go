@@ -98,8 +98,8 @@ func (m *Manager) Apply(pid int) (err error) {
 				delete(m.Paths, sys.Name())
 				continue
 			}
+			return err
 		}
-		return err
 	}
 	return nil
 }
