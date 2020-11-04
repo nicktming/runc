@@ -14,7 +14,7 @@ func main() {
 		log.Fatal(err)
 	}
 	config := &configs.Config{
-		Rootfs: rootfs,
+		Rootfs: "/root/go/src/github.com/opencontainers/mycontainer/rootfs",
 		Capabilities: []string{
 			"CHOWN",
 			"DAC_OVERRIDE",
